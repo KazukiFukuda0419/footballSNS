@@ -14,7 +14,7 @@
  
 </head>
 <body>
-   <h1>@yeild('title')</h1>
+   <h1>@yield('title')</h1>
         @section('menubar')
         <ul>
           <p class="menutitle">サッカー掲示板</p>
