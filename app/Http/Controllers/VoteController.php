@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 class VoteController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         return view('hello.question');
     }
     
@@ -24,18 +23,18 @@ class VoteController extends Controller
             return view('hello.question',['data' => $data]);
         }
         
-        DB::insert('insert into count (user_id,res) values (:user_id,:res)',$param);
+        DB::insert('insert into count (user_id,res) values (:user_id,:res)',$param);//countテーブルにデータ格納する。
         
-        return redirect('hello');
+        return redirect('hello/res');
     }
 
     public function count(Request $request)
     {
-        $counts1 = DB::table('count')->count()->where('res','=','メッシ');
-        $counts2 = DB::table('count')->count()->where('res','=','C・ロナウド');
-        $counts3 = DB::table('count')->count()->where('res','=','マラドーナ');
-        $counts4 = DB::table('count')->count()->where('res','=','ペレ');
-        $counts5 = DB::table('count')->count()->where('res','=','ロナウド');
+        $counts1 = DB::table('count')->where('res','=','メッシ')->count();
+        $counts2 = DB::table('count')->where('res','=','C・ロナウド')->count();
+        $counts3 = DB::table('count')->where('res','=','マラドーナ')->count();
+        $counts4 = DB::table('count')->where('res','=','ペレ')->count();
+        $counts5 = DB::table('count')->where('res','=','ロナウド')->count();
        
         $counts = [$counts1,$counts2,$counts3,$counts4,$counts5];
         

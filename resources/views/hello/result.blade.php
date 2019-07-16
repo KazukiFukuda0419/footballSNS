@@ -1,12 +1,17 @@
 @extends('layouts.helloapp')
-<script src="soccerSNS/Chart.js"></script>
-
 @section('title','questionnaire result')
 
 @section('menubar')
 @parent
+<h2>Q.史上最高だと思う選手は誰ですか？</h2>
 投票結果ページ
-<canvas id="bar" height="450" width="600"></canvas>
+@foreach($counts as $count)
+<tr>
+  <td>{{$count}}票</td>
+</tr>
+@endforeach
+
+
 @endsection
 
 @section('footer')

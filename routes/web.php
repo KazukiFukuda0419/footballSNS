@@ -17,11 +17,12 @@
     Route::post('hello/del','HelloController@delete');
     Route::get('hello/que','HelloController@question');
     Route::post('vote/add','VoteController@create');
-    Route::get('/home',function(){
+    Route::get('home',function(){
                return view('home');
-               });
+               })->middleware('auth');
     Route::get('auth/register','Auth\RegisterController@showRegistrationForm');
     Route::post('auth/register','Auth\RegisterController@register');
+    Route::get('hello/res','VoteController@count');
     
 //    Route::post('hello/del','HelloController@delete');
     
@@ -29,4 +30,4 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
