@@ -3,36 +3,42 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\HelloRequest;
 use App\Http\Requests\DeleteRequest;
-
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HelloController extends Controller
 {
     public function index(){
-        $items = DB::select('select * from people');
+        $items = DB::select('select * from comments');
         return view('hello.add',['items' => $items]);
         
     }
     
-    public function add(Request $request)
+    public function add(){
+        return view('hello.bulletin');
+    }
+    
+    public function add1(Request $request)
     {
-        return view('hello.add');
+        $items = DB::select('select * from comments');
+        return view('hello.add',['items' => $items]);
     }
     
     public function create(HelloRequest $request)
     {
         $param = [
            'name' => $request->name,
+           'user_id' => Auth::id(),
            'comment' => $request->comment,
         ];
-        DB::insert('insert into people (handle,comment) values (:name,:comment)',$param);
+        DB::insert('insert into comments (handle,user_id,comment) values (:name,:user_id,:comment)',$param);
         
         return redirect('hello');
     }
 
     public function remove(){
-        $items = DB::select('select * from people');
+        $items = DB::select('select * from comments');
         return view('hello.rem',['items' => $items]);
     }
     
@@ -42,7 +48,13 @@ class HelloController extends Controller
           'id' => $request->num,
         ];
         
-        DB::delete('delete from people where id = :id',$param);
+        $logs = DB::table('comments')->where('id',$request->num)->first();
+        if( Auth::id() !== $logs->user_id){
+            $data=['msg' => '注意！:消せるのは、自分が書いたコメントだけです。',];
+            return view('hello.add',$data);
+        }
+        
+        DB::delete('delete from comments where id = :id',$param);
         
         return redirect('hello/rem');
         

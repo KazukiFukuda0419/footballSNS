@@ -7,20 +7,26 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 class VoteController extends Controller
 {
-    public function index(){
-        return view('hello.question');
+    public function __construct(){
+        $this->middleware('auth');
     }
+    
+    public function index(){
+        return view('home');
+    }
+    
     
     public function create(Request $request)
     {
+        
         $param = [
         'user_id' => Auth::id(),
         'res' => $request->que,
         ];
-        $logs = DB::table('count')->where('user_id','=','Auth::id')->count();//ユーザーが何回めの投票を行ったか調べ$logs変数に格納する。
+        $logs = DB::table('count')->where('user_id',Auth::id())->count();//ユーザーが何回めの投票を行ったか調べ$logs変数に格納する。
         if($logs > 0){    //logsが1以上の場合投票ページに遷移させメッセージを出す。
-            $data = ['msg' => '投票は1ユーザーにつき一回です。',];
-            return view('hello.question',['data' => $data]);
+            $data=['msg' => '注意！:投票は1ユーザーにつき一回です。',];
+            return view('hello.question',$data);
         }
         
         DB::insert('insert into count (user_id,res) values (:user_id,:res)',$param);//countテーブルにデータ格納する。
@@ -41,5 +47,7 @@ class VoteController extends Controller
         return view('hello.result',['counts' => $counts]);
        
     }
+   
     
+  
 }

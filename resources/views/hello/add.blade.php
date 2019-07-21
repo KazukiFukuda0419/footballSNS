@@ -25,16 +25,32 @@
      color:red;
      text-decoration:none;
     }
+    .article{
+     margin:55px auto;
+    width:1100px;
+    }
+    .img{
+        text-align:center;
+    }
+    h2{
+        padding-left:90px;
+    }
     </style>
 @section('title','Add')
 
 @section('menubar')
    @parent
-   新規投稿ページ
+   <h2>レアル、アザールの加入を正式発表！　念願の移籍がついに実現！</h2>
 @endsection
 
 @section('board')
-     <div class=board>
+    <p class=img>
+        <img class="logo" src="{{ asset('image/アザール.jpg') }}" alt="アザールの画像">
+    </p>
+        <div class=article>
+    <p>　レアル・マドリードはチェルシーに所属するベルギー代表MFエデン・アザールを獲得した。7日にクラブ公式HPにて発表している。なお、契約は2024年6月30日までの5年間となっている。<br>&emsp;アザールは2007－08シーズンにリールにてプロデビューを飾った。2011－12シーズンにリーグ戦で20ゴール18アシストと活躍した後、チェルシーへと移籍を果たした。同クラブでは8年間の在籍で352試合に出場110ゴール92アシストをマーク。2度のプレミアリーグ優勝やヨーロッパリーグ（EL）制覇など、計6度のタイトル獲得に貢献してきた。</p>
+        <div>
+    <div class=board>
        <table border="1" class=tal>
        @if(isset($items))
            <th>NO.</th><th>ハンドルネーム</th><th>コメント</th>

@@ -11,18 +11,17 @@
 |
 */
     Route::get('hello','HelloController@index');
-    Route::get('hello/add','HelloController@add');
+    Route::get('hello/add','HelloController@add1');
     Route::post('hello/add','HelloController@create');
     Route::get('hello/rem','HelloController@remove');
     Route::post('hello/del','HelloController@delete');
     Route::get('hello/que','HelloController@question');
     Route::post('vote/add','VoteController@create');
-    Route::get('home',function(){
-               return view('home');
-               })->middleware('auth');
+    Route::get('/home','VoteController@index')->middleware('auth');
     Route::get('auth/register','Auth\RegisterController@showRegistrationForm');
     Route::post('auth/register','Auth\RegisterController@register');
     Route::get('hello/res','VoteController@count');
+    
     
 //    Route::post('hello/del','HelloController@delete');
     

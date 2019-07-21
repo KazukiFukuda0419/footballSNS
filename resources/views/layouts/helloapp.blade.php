@@ -16,10 +16,9 @@
 <body>
    <h1>@yield('title')</h1>
         @section('menubar')
-        <ul>
-          <p class="menutitle">サッカー掲示板</p>
-          <li>@show</li>
-        </ul>
+        
+          @show
+        
         <hr size="1">
         <div class="board">
         @yield('board')

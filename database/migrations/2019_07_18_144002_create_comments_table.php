@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePeopleTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreatePeopleTable extends Migration
      */
     public function up()
     {
-        Schema::create('people', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('comments', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('user_id');//idと連結するカラム
             $table->string('handle');//ハンドルネームを任意で付けれる
             $table->string('comment');//掲示板のコメント部分
-            $table->timestamps();//作成日時と更新日時を保管するフィールド
+            $table->timestamps();
         });
     }
 
@@ -29,6 +29,6 @@ class CreatePeopleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('people');//指定してあった名前のテーブルがあった場合は削除する。
+        Schema::dropIfExists('comments');
     }
 }
